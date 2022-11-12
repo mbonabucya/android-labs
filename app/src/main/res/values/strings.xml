@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lab 2</string>
+    <string name="Name">James </string>
+    <string name="Hello">Names:</string>
+    <string name="Food"> Food</string>
+    <string name="button">Show me</string>
+    <string name="addname">Enter Full name</string>
+</resources>

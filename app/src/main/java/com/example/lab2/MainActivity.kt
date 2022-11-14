@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -40,24 +39,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun clickme(clicked:()->Unit)
+fun Clickme(clicked:()->Unit)
 {
 Button(onClick = clicked) {
     Text(stringResource(id = R.string.button),
         modifier = Modifier
             .padding(top = 10.dp, bottom = 20.dp)
             .align(Alignment.Top)
-
-
     )
 
 }
 }
 
 //function to create the textfield
-
 @Composable
-fun addTextField(name:String,changed:(String)->Unit)
+fun AddTextField(name:String,changed:(String)->Unit)
 {
     TextField(
         value = name,
@@ -66,12 +62,10 @@ fun addTextField(name:String,changed:(String)->Unit)
         modifier = Modifier
             .width(300.dp)
             .padding(top = 40.dp, bottom = 10.dp)
-
     )
 }
 
 //output message
-
 @Composable
 fun OutputMessage(newName: String){
     if(newName.isNotEmpty()) {
@@ -81,18 +75,22 @@ fun OutputMessage(newName: String){
             fontSize = 24.sp,
             textAlign = TextAlign.Center
         )
-    }
-}
 
+    }
+
+
+}
 
 @Composable
 fun Greeting() {
-
     var name by remember { mutableStateOf("")}
     var textFieldName by remember { mutableStateOf("") }
-
-
-
+    var image by remember {
+        mutableStateOf(value =0)
+    }
+   val images = arrayOf(R.drawable.img,R.drawable.img_1,R.drawable.food)
+    var imageid = images.random()
+    var isbuttonclicked:Boolean = false;
 
     Column{
 
@@ -101,21 +99,22 @@ fun Greeting() {
         )
         {
             Column() {
-                addTextField(name = textFieldName, changed = { textFieldName = it })
-                clickme({ name = textFieldName })
+                AddTextField(name = textFieldName, changed = { textFieldName = it })
+                Clickme{
+                    name = textFieldName
+                    image = imageid
+
+                }
             }
-
         }
-
-        Image(painter = painterResource(id =R.drawable.food),
-            contentDescription = stringResource(id = R.string.Food ),
-            modifier = Modifier
-                .padding(top = 20.dp, bottom = 10.dp, start = 30.dp)
-                .size(240.dp)
-                .clip(CircleShape)
-                .align(Alignment.Start)
-        )
-
+      Image(painter = painterResource(imageid),
+        contentDescription = stringResource(id = R.string.Food ),
+         modifier = Modifier
+             .padding(top = 20.dp, bottom = 10.dp, start = 30.dp)
+             .size(240.dp)
+            .clip(CircleShape)
+             .align(Alignment.Start)
+      )
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -125,16 +124,7 @@ fun Greeting() {
         )
         {
             OutputMessage(newName = name)
-//            Text(
-//
-//                stringResource(R.string.Hello) + " " + name,
-//                color = Color.Blue,
-//                fontSize = 34.sp,
-//                textAlign = TextAlign.Center
-//            )
-
         }
-
     }
 }
 

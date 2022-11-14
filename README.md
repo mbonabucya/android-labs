@@ -4,7 +4,7 @@
 # Fall 2022 Androind Development Lab 2
 
 Lab 2 is about adding the Textfieild , Add the photo and Implement the button click listener in android using Kotlin.
-![screenshot](./src/res/drawable/file.png)
+![screenshot](./app/src/res/drawable/file.png)
 
 ## Built With
 
